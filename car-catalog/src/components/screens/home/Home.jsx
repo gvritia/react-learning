@@ -8,21 +8,8 @@ import {useNavigate} from "react-router-dom";
 function Home() {
     const [cars, setCars] = useState(carsDate);
 
-    // Для загрузки с сервера
-    useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const data = await CarService.getAll(); // Добавьте скобки
-            setCars(data);
-        } catch (error) {
-            console.error("Error fetching cars:", error);
-        }
-    }
-    fetchData(); // Вызовите функцию
-}, [])
 
     // const nav = useNavigate()
-
     return (
         <div>
             <h1>Cars catalog</h1>

@@ -10,16 +10,17 @@ function CarItem({car}) {
                     backgroundImage: `url(${car.image})`,
                 }}
             />
-            <div className={styles.info}/>
-            <h2>{car.name}</h2>
-            <p>
-                {new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                currencyDisplay: 'narrowSymbol',
-            }).format(car.price)}
-            </p>
-            <Link className='btn' to={`/car/${car.id}`}>Read more</Link>
+            <div className={styles.info}>
+                <h2>{car.name}</h2>
+                <p>
+                    {new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        currencyDisplay: 'narrowSymbol',
+                    }).format(car.price)}
+                </p>
+                <Link className='btn' to={`/car/${car.id}`}>Read more</Link>
+            </div>
         </div>
     )
 }
