@@ -1,9 +1,7 @@
 import {cars as carsDate} from './cars.data.js'
 import CarItem from "./car-item/CarItem.jsx";
 import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
-import {useEffect, useState} from "react";
-import CarService from "../../../service/car.service.js";
-import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 function Home() {
     const [cars, setCars] = useState(carsDate);
