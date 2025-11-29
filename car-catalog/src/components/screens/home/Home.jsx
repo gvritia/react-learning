@@ -9,7 +9,6 @@ function Home() {
 
     const {user, setUser} = useContext(AuthContext);
 
-    // const nav = useNavigate()
     return (
         <div>
             <h1>Cars catalog</h1>

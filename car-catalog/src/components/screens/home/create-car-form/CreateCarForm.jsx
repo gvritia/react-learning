@@ -1,5 +1,4 @@
 import styles from './CreateCarForm.module.css';
-import {useState} from "react";
 import {useForm} from "react-hook-form";
 
 function CreateCarForm({setCars}) {
