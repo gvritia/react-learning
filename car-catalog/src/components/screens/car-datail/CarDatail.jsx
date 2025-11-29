@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
+import {withAuth} from "../../../HOC/withAuth.jsx";
 
 const CarDatail = () => {
     const {id} = useParams();
@@ -18,7 +19,7 @@ const CarDatail = () => {
         fetchData();
     }, [id])
 
-    if (!car?.name) return(
+    if (!car?.name) return (
         <p>Loading...</p>
     );
 
@@ -30,4 +31,4 @@ const CarDatail = () => {
     )
 }
 
-export default CarDatail;
+export default withAuth(CarDatail);

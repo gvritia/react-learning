@@ -1,5 +1,6 @@
 import styles from './CreateCarForm.module.css';
 import {useState} from "react";
+import {useForm} from "react-hook-form";
 
 const ClearData = {
     name: '',
@@ -10,7 +11,12 @@ const ClearData = {
 function CreateCarForm({setCars}) {
     const [data, setData] = useState(ClearData);
 
-    const createCar = e => {
+    const {register, reset,
+        handleSubmit, formState: {errors}} = useForm({
+        mode: 'onChange',
+    })
+
+    const createCar = data => {
         e.preventDefault()
         setCars(prev => [
             {
@@ -20,41 +26,39 @@ function CreateCarForm({setCars}) {
             ...prev]
         );
 
-        setData({
-            name: '',
-            price: '',
-            image: '',
-        })
+        reset()
     }
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(createCar)}>
             <input
                 placeholder="Name"
-                onChange={
-                    e => setData(prev =>
-                        ({...prev, name: e.target.value}))
-                }
-                value={data.name}
+                {...register("name", { required: 'Name is required' })}
             />
+            {errors?.name.message && (
+                <p style={{ color: 'red' }}>
+                    Name is required
+                </p>
+            )}
             <input
                 placeholder="Price"
-                onChange={
-                    e => setData(prev =>
-                        ({...prev, price: e.target.value}))
-                }
-                value={data.price}
+                {...register("price", { required: true })}
             />
+            {errors?.price.message && (
+                <p style={{ color: 'red' }}>
+                    Price is required
+                </p>
+            )}
             <input
                 placeholder="Image"
-                onChange={
-                    e => setData(prev =>
-                        ({...prev, image: e.target.value}))
-                }
-                value={data.image}
+                {...register("image", { required: true })}
             />
-
-            <button className="btn" onClick={e => createCar(e)}>Create</button>
+            {errors?.image && (
+                <p style={{ color: 'red' }}>
+                    Image is required
+                </p>
+            )}
+            <button className="btn">Create</button>
         </form>
     )
 }
