@@ -2,22 +2,12 @@ import styles from './CreateCarForm.module.css';
 import {useState} from "react";
 import {useForm} from "react-hook-form";
 
-const ClearData = {
-    name: '',
-    price: '',
-    image: '',
-}
-
 function CreateCarForm({setCars}) {
-    const [data, setData] = useState(ClearData);
-
-    const {register, reset,
-        handleSubmit, formState: {errors}} = useForm({
+    const {register, reset, handleSubmit, formState: {errors}} = useForm({
         mode: 'onChange',
     })
 
-    const createCar = data => {
-        e.preventDefault()
+    const createCar = (data) => {
         setCars(prev => [
             {
                 id: prev.length + 1,
@@ -25,7 +15,6 @@ function CreateCarForm({setCars}) {
             },
             ...prev]
         );
-
         reset()
     }
 
@@ -35,30 +24,39 @@ function CreateCarForm({setCars}) {
                 placeholder="Name"
                 {...register("name", { required: 'Name is required' })}
             />
-            {errors?.name.message && (
+            {errors?.name && (
                 <p style={{ color: 'red' }}>
-                    Name is required
+                    {errors.name.message}
                 </p>
             )}
+
             <input
                 placeholder="Price"
-                {...register("price", { required: true })}
+                type="number"
+                {...register("price", {
+                    required: 'Price is required',
+                    valueAsNumber: true
+                })}
             />
-            {errors?.price.message && (
+            {errors?.price && (
                 <p style={{ color: 'red' }}>
-                    Price is required
+                    {errors.price.message}
                 </p>
             )}
+
             <input
                 placeholder="Image"
-                {...register("image", { required: true })}
+                {...register("image", {
+                    required: 'Image is required'
+                })}
             />
             {errors?.image && (
                 <p style={{ color: 'red' }}>
-                    Image is required
+                    {errors.image.message}
                 </p>
             )}
-            <button className="btn">Create</button>
+
+            <button type="submit" className="btn">Create</button>
         </form>
     )
 }
